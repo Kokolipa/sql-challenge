@@ -7,9 +7,10 @@ It’s been two weeks since you were hired as a new data engineer at Pewlett Hac
 
 #### ERD Diagram Breakdown
 1. **Employees table:**
-    - PK: emp_no
+    - PK FK: emp_no
     - FK: emp_title_id REFERANCE PRIMARY KEY = titles.title_id
-    - Reason - Employees & Salaries tables: The employee’s table must contain the primary key as opposed to the salaries table. Salaries can change over time and can be modified on an annual basis, employees can move departments and roles. So recording the employees within the employee’s table is the most “stable” unique identifier, which makes that column the best “candidate” for PK.  
+    - Reason - Employees & Salaries tables: The employee’s table must contain the primary key as opposed to the salaries table. Salaries can change over time and can be modified on an annual basis, employees can move departments and roles. So recording the employees within the employee’s table is the most “stable” unique identifier, which makes that column the best “candidate” for PK.
+        - NOTE: The column emp_no for the employees and the salaries table is a PK and a FK. The company splitted these two tables for security reasons, in reality salaries could be recorded in the employees table. 
 2. **Departments table:**
     - PK: dept_no
     - Reason: The departments table is the only table responsible in updating the overall departments within the company. If in the future the company will add another department, because of the depandencies stractured, the rest of the tables will be updated simultaneously.
@@ -17,7 +18,7 @@ It’s been two weeks since you were hired as a new data engineer at Pewlett Hac
     - PK: title_id
     - Reason: The only table in our database that is responsible for the title's description is the titles table. 
 4. **Salaries table:**
-    - FK: emp_no
+    - PK FK: emp_no
     - Reason: Salaries can change on an annual basis, employees can move from one department to another and so defining the salaries as the source of dependency as PK doesn't really make sense; even though the Salaries orginises the employees number in ascending order, in these circumstances, it won't be considered as best practice.
 5. **dep_emp table:** 
     - PK: emp_no, dept_no (composite primary key)
