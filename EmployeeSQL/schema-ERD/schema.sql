@@ -60,14 +60,15 @@ CREATE TABLE dept_manager (
 -- (6) Creating the salaries table
 ------------------------------------------------
 CREATE TABLE salaries (
-	id SERIAL PRIMARY KEY,
-    emp_no INT NOT NULL,
+    emp_no INT PRIMARY KEY,
     salary INT NOT NULL,
 	FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
 );
 
-
-
+-- Before we add the constraint we first need to import the CSVs then => 
+	-- Adding the foreign key constraint to employees table
+ALTER TABLE employees
+ADD FOREIGN KEY (emp_no) REFERENCES salaries(emp_no);
 
 -- CONFIRMING migration of data 
 SELECT * FROM titles LIMIT 100;
