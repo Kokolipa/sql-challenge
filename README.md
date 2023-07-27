@@ -32,23 +32,18 @@ It’s been two weeks since you were hired as a new data engineer at Pewlett Hac
 #### Folder structure
 ``` yml
 .
-├── Analysis_World
-│   ├── output_data                      
-│   │   ├── cities.csv                           
-│   │   ├── Fig1.png
-│   │   ├── Fig2.png  
-│   |   ├── Fig3.png
-│   |   ├── Fig4.png 
-│   ├── starter_data
-│   |   ├── _pycache_
-│   |   |   ├── api_keys.cpython-310.pyc 
-│   |   ├── images
-│   |   |   ├── Fig1.png 
-│   |   |   ├── Fig2.png 
-│   |   |   ├── Fig3.png 
-│   |   |   ├── Fig4.png 
-│   |   ├── cities.csv 
-│   |   ├── VacationPy.ipynb     # Analysis notebook - Part 2
-│   |   ├── WeatherPy.ipynb      # Analysis notebook - Part 1                    
+├── CSVs
+│   ├── departments.csv                      
+│   ├── dept_emp.csv   
+│   ├── dept_manager.csv    
+│   ├── employees.csv  
+│   ├── salaries.csv   
+│   ├── titles.csv    
+├── EmployeeSQL
+│   |   ├── schema-ERD
+│   |   |   ├── ERD.png
+│   |   |   ├── ERD_description.pdf
+│   |   |   ├── schema.sql 
+│   |   |   ├── queries.sql               
 |___README.md
 ``` 
