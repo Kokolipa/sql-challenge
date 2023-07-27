@@ -7,14 +7,14 @@ DROP TABLE IF EXISTS dept_manager;
 DROP TABLE IF EXISTS salaries;
 
 
--- Creating the titles table
+-- (1) Creating the titles table
 ------------------------------------------------
 CREATE TABLE titles (
     title_id VARCHAR(15) PRIMARY KEY,
     title VARCHAR(50) NOT NULL
 );
 
--- Creating the employees table
+-- (2) Creating the employees table
 ------------------------------------------------
 CREATE TABLE employees (
     emp_no INT PRIMARY KEY,
@@ -27,14 +27,14 @@ CREATE TABLE employees (
     FOREIGN KEY (emp_title_id) REFERENCES titles(title_id)
 );
 
--- Creating the departments table
+-- (3) Creating the departments table
 ------------------------------------------------
 CREATE TABLE departments (
     dept_no VARCHAR(6) PRIMARY KEY ,
     dept_name VARCHAR(100) NOT NULL
 );
 
--- Creating the dep_emp table
+-- (4) Creating the dep_emp table
 ------------------------------------------------
 
 -- contains composite primary key
@@ -47,7 +47,7 @@ CREATE TABLE dep_emp (
 );
 
 
--- Creating the dept_manager table
+-- (5) Creating the dept_manager table
 ------------------------------------------------
 CREATE TABLE dept_manager (
 	dept_no VARCHAR NOT NULL,
@@ -57,29 +57,16 @@ CREATE TABLE dept_manager (
     FOREIGN KEY (dept_no) REFERENCES departments(dept_no)
 );
 
--- Creating the salaries table
+-- (6) Creating the salaries table
 ------------------------------------------------
 CREATE TABLE salaries (
+	id SERIAL PRIMARY KEY,
     emp_no INT NOT NULL,
     salary INT NOT NULL,
 	FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
 );
 
--- contains composite primary key
-CREATE TABLE dept_manager (
-    emp_no INT NOT NULL,
-    dept_no VARCHAR(6) NOT NULL,
-    PRIMARY KEY (emp_no, dept_no),
-    FOREIGN KEY (emp_no) REFERENCES employees(emp_no),
-    FOREIGN KEY (dept_no) REFERENCES departments(dept_no)
-);
 
--- emp_no is PK and FK
-CREATE TABLE salaries (
-    emp_no INT NOT NULL,
-    salary INT NOT NULL,
-    FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
-);
 
 
 -- CONFIRMING migration of data 
