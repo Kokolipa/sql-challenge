@@ -28,7 +28,7 @@ It’s been two weeks since you were hired as a new data engineer at Pewlett Hac
     - FK: emp_no, dept_no
     - Reason: Since 1 employee can manage multiple departments over time, a composite primary key is most suitable.
 ### ERD Diagram Image
-![ERD_diagram](https://github.com/Kokolipa/sql-challenge/blob/sql_main/EmployeeSQL/schema-ERD/QuickDBD-Free%20Diagram.png)
+![ERD_diagram](https://github.com/Kokolipa/sql-challenge/blob/sql_main/EmployeeSQL/schema-ERD/ERD.png)
 #### Folder structure
 ``` yml
 .
