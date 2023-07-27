@@ -1,44 +1,34 @@
-# SQL: Modelling, Engineering, and Analysis 
-
+# SQL: Modelling, Engineering, Analysis, and Normalisation 
+* The database attached is N1-N4 normalised
 ### Project description:
 Design the SQL tables and dependencies to hold the data from the CSV files, import the CSV files into a SQL database, and answer questions about the data.
-### Project outline
-- Part 1:
-    - Generating random geographic coordinates & using these coordinates and the openweathermap api to retrieve the cities. 
-    - Creating a series of scatter plots to showcase the following relationships: Latitude vs. Temperature, Latitude vs. Humidity, Latitude vs. Cloudiness, and Latitude vs. Wind Speed. 
-    - Performing analysis comparison between the northern and the sourthern hemispheres (see insights below)
-    - Generating a csv file from the dataframe created. 
-- Part 2:
-    - Using the weather data (the generated csv file) to plan future vacations based on information received from geoViews Python library, and the Geoapify API. To conclude which destination are most suitable for vacation, I have taken **Temperature, Wind Speed, Cloudiness, and Humidity level into account. 
+### Project background
+It’s been two weeks since you were hired as a new data engineer at Pewlett Hackard (a fictional company). Your first major task is to do a research project about people whom the company employed during the 1980s and 1990s. All that remains of the employee database from that period are six CSV files.
 
-#### Libraries & APIs used
-1. Libraries: 
-    1. Matplotlib
-    2. Pandas
-    3. NumPy
-    4. time
-    5. requests
-    6. scipy
-    7. hvplot
-    8. geoViews
-2. APIs:
-    1. Geoapify
-    2. openweathermap
-
-
-#### TLDR - Conclusions
-##### Analysis comparison northern and southern hemispheres: 
-*  1st Comparison: 
-    * **The Northern Hemisphere:** The linear relationship and the correlation coefficient between Latitude and Max Temperature in the Northern Hemisphere suggest a **strong negative relationship**. This makes sense; **the temperature decreases** as we move towards the North Hemisphere and the north pole. 
-    * **The Southern Hemisphere:** The linear relationship and the correlation coefficient between Latitude and Max Temperature in the Southern Hemisphere suggest a **strong positive relationship**. This makes sense; **the temperature increases** as we move away from the south pole toward the prime meredian of the earth.  
-* 2nd Comparison: 
-    * **The Northern &  Southern Hemispheres:** The low r-squared value of 0.001987981519169641 and 0.001987981519169641 for the North and South Hemispheres suggests that Latitude explains only a small portion of the variation in Humidity. This indicates that Latitude alone is not a strong predictor of Humidity. Similarly, the correlation coefficient of -0.04458678637410016 and 0.0266789376537484 of the north and south hemispheres, which is close to 0, indicates a weak and almost negligible linear relationship between Latitude and Humidity.**From these results, it can be concluded that Latitude alone has minimal influence on Humidity.**
-* 3rd Comparison:
-    * **The Northern &  Southern Hemispheres:** The r-squared value of 0.0026492315380715658 and 0.012520193707532417 of the north and south hemispheres indicates that Latitude explains only a small fraction of the variation in Cloudiness. This suggests that Latitude alone is not a strong predictor of Cloudiness. Similarly, the correlation coefficient of -0.051470686201677586 and -0.11189367143646865 of the north and south hemispheres, which is close to 0, indicates a weak and almost negligible linear relationship between Latitude and Cloudiness. **Based on these findings, it can be inferred that Latitude has minimal influence on Cloudiness.**
-* 4th Comparison: 
-    * **The Northern Hemisphere:** The linear relationship *(r_square  = 0.0008293753684501447)* as well as the correlation *(pearsonsr = statistic=0.02879887790262228, pvalue=0.5736954728511657)* between Latitude and Wind Speed in the Northern Hemisphere barely exists.**From this analysis, it can be inferred that Wind Speed does not show a significant dependence on Latitude in the northern hemisphere, meaning, Wind Speed can vary equally across different cities with different latitude coordinates.** 
-    * **The Southern Hemisphere:** The linear relationship *(r_square =  0.03453014357821518)* as well as the correlation *(statistic=-0.1858228822783006, pvalue=0.010261658359267328)* between Latitude and Wind Speed in the South Hemisphere barely exists. The r-squared value of 0.03453014357821518 indicates that the linear regression model explains only a small proportion of the variability in Wind Speed based on Latitude in the southern hemisphere. This suggests that Latitude has limited predictive power in explaining the variation in Wind Speed. The correlation coefficient indicates on negative correlation between Latitude and Wind Speed in the southern hemisphere (statistic=-0.1858228822783006). **In summary, the analysis suggests Latitude has a weak and limited relationship with Wind Speed in the southern hemisphere.**
-
+#### ERD Diagram Breakdown
+1. **Employees table:**
+    - PK: emp_no
+    - FK: emp_title_id REFERANCE PRIMARY KEY = titles.title_id
+    - Reason - Employees & Salaries tables: The employee’s table must contain the primary key as opposed to the salaries table. Salaries can change over time and can be modified on an annual basis, employees can move departments and roles. So recording the employees within the employee’s table is the most “stable” unique identifier, which makes that column the best “candidate” for PK.  
+2. **Departments table:**
+    - PK: dept_no
+    - Reason: The departments table is the only table responsible in updating the overall departments within the company. If in the future the company will add another department, because of the depandencies stractured, the rest of the tables will be updated simultaneously.
+3. **Titles table:** 
+    - PK: title_id
+    - Reason: The only table in our database that is responsible for the title's description is the titles table. 
+4. **Salaries table:**
+    - FK: emp_no
+    - Reason: Salaries can change on an annual basis, employees can move from one department to another and so defining the salaries as the source of dependency as PK doesn't really make sense; even though the Salaries orginises the employees number in ascending order, in these circumstances, it won't be considered as best practice.
+5. **dep_emp table:** 
+    - PK: emp_no, dept_no (composite primary key)
+    - FK: emp_no, dept_no
+    - Reason: Since one employee can work for multiple departments and the departments can have multiple employees, a composite primary key is most suitable in these circumstances.
+6. **dept_manager table:** 
+    - PK: emp_no, dept_no (composite primary key)
+    - FK: emp_no, dept_no
+    - Reason: Since 1 employee can manage multiple departments over time, a composite primary key is most suitable.
+### ERD Diagram Image
+![ERD_diagram](https://github.com/Kokolipa/sql-challenge/blob/sql_main/EmployeeSQL/schema-ERD/QuickDBD-Free%20Diagram.png)
 #### Folder structure
 ``` yml
 .
